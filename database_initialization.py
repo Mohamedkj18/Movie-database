@@ -13,14 +13,15 @@ def create_tables(con, cursor):
     # Define tables 
     tables['Movie'] = (
         "CREATE TABLE `Movie` ("
-        " `title` VARCHAR(255) NOT NULL,"
+        " `movie_id` INT NOT NULL AUTO_INCREMENT,"
+        " `title` VARCHAR(255),"
         " `average_rating` FLOAT,"
         " `release_date` DATE,"
         " `budget` INT,"
         " `revenue` BIGINT,"
         " `runtime` FLOAT,"
         " `meta_score` INT,"
-        " PRIMARY KEY (`title`)"
+        " PRIMARY KEY (`movie_id`)"
         ")"
     )
 
@@ -34,10 +35,10 @@ def create_tables(con, cursor):
     tables['Staff_Movie'] = (
         "CREATE TABLE `Staff_Movie` ("
         " `person_name` VARCHAR(255) NOT NULL,"
-        " `movie_title` VARCHAR(255) NOT NULL,"
+        " `movie_id` INT NOT NULL,"
         " `role` ENUM('actor', 'writer', 'director'),"
         " FOREIGN KEY (`person_name`) REFERENCES `Person`(`name`),"
-        " FOREIGN KEY (`movie_title`) REFERENCES `Movie`(`title`)"
+        " FOREIGN KEY (`movie_id`) REFERENCES `Movie`(`movie_id`)"
         ")"
     )
 
@@ -50,9 +51,9 @@ def create_tables(con, cursor):
 
     tables['Movie_Country'] = (
         "CREATE TABLE `Movie_Country` ("
-        " `movie_title` VARCHAR(255) NOT NULL,"
+        " `movie_id` INT NOT NULL,"
         " `country_name` VARCHAR(255) NOT NULL,"
-        " FOREIGN KEY (`movie_title`) REFERENCES `Movie`(`title`),"
+        " FOREIGN KEY (`movie_id`) REFERENCES `Movie`(`movie_id`),"
         " FOREIGN KEY (`country_name`) REFERENCES `Country`(`country_name`)"
         ")"
     )
@@ -66,9 +67,9 @@ def create_tables(con, cursor):
 
     tables['Movie_Language'] = (
         "CREATE TABLE `Movie_Language` ("
-        " `movie_title` VARCHAR(255) NOT NULL,"
+        " `movie_id` INT NOT NULL,"
         " `language_name` VARCHAR(255) NOT NULL,"
-        " FOREIGN KEY (`movie_title`) REFERENCES `Movie`(`title`),"
+        " FOREIGN KEY (`movie_id`) REFERENCES `Movie`(`movie_id`),"
         " FOREIGN KEY (`language_name`) REFERENCES `Language`(`language_name`)"
         ")"
     )
