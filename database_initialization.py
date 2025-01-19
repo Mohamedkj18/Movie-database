@@ -22,7 +22,8 @@ def create_tables(con, cursor):
         " `runtime` FLOAT,"
         " `meta_score` INT,"
         " PRIMARY KEY (`movie_id`)"
-        ")"
+        ");"
+        "CREATE FULLTEXT INDEX idx_movie_title ON Movie(title);"
     )
 
     tables['Person'] = (
@@ -39,8 +40,11 @@ def create_tables(con, cursor):
         " `role` ENUM('actor', 'writer', 'director'),"
         " FOREIGN KEY (`person_name`) REFERENCES `Person`(`name`),"
         " FOREIGN KEY (`movie_id`) REFERENCES `Movie`(`movie_id`)"
-        ")"
+        ");"
+        "CREATE FULLTEXT INDEX idx_person_name ON Staff_Movie(person_name);"
     )
+
+
 
     tables['Country'] = (
         "CREATE TABLE `Country` ("
